@@ -1,4 +1,4 @@
-package com.company;
+package com.company.week_02;
 
 /**
  * Created by frafiq on 1/24/2017.
