@@ -10,6 +10,7 @@ import java.util.*;
  * 
  * Description: This program uses ArrayList to add elements to an array, remove elements from an array,
  *              update and print the element of the array.
+ *
  */
 
 
