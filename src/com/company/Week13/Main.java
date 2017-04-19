@@ -9,43 +9,50 @@ import java.util.*;
 import java.util.concurrent.*;
 
 class CheckingAccount{
-    private Semaphore permits = new Semaphore(1, true);
     private int balance;
     public CheckingAccount(int balance){
         this.balance = balance;
     }
+
     public int withdraw(int amount){
+        if (amount <= balance) {
+            int sleepTime = (int) (Math.random() * 200);
 
-        try{
-
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            balance -= amount;
         }
+        return balance;
     }
 }
-class AccountHolder implements Runnable{
-    private String name;
-    private  CheckingAccount account;
 
-    public void run(){
-        for (int i=0; i < 10; i++){
-            System.out.println(name + " tries to withdraw $ 10, balance: " +
-            account.withdraw(10));
-        }
-    }
-}
 
 
 public class Main {
     public static  void  main(String[] args){
         CheckingAccount account = new CheckingAccount(100);
-        AccountHolder person1 = new AccountHolder("Person1",account);
-        AccountHolder person2 = new AccountHolder("Person2",account);
-        public static void sleep(int duration){
-
-    }
-        BlockingQueue<Character> queue = new ArrayBlockingQueue<Character>(5);
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-        executor.submit()
-
+        Runnable r = new Runnable(){
+            @Override
+            public void run() {
+                String name = Thread.currentThread().getName();
+                for (int i = 0; i < 10; i++){
+                    synchronized (account){
+                        System.out.println(name +
+                                " tries to withdraw $10, balance: " +
+                                account.withdraw(10));
+                    }
+                }
+            }
+        };
+        Thread person1 = new Thread(r);
+        person1.setName("Person1");
+        Thread person2 = new Thread(r);
+        person1.setName("Person2");
+        person1.start();
+        person2.start();
 
     }
 }
