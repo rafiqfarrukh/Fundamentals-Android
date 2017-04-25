@@ -1,5 +1,6 @@
 package com.company.Project3;
 import java.util.*;
+import java.util.function.ToIntFunction;
 
 /************************************************************************************************************
  * Name : Frank Rafiq
@@ -49,8 +50,26 @@ class TaskDetail implements Comparable<TaskDetail>{
     @Override
     public int compareTo(TaskDetail other) {
 
+
         return name.compareTo(other.name);
     }
+
+
+}
+class Sortbyroll implements Comparator<TaskDetail>
+{
+    // Used for sorting in ascending order of
+    // roll number
+    public int compare(TaskDetail a, TaskDetail b)
+    {
+
+        return a.getPriority() - b.getPriority();
+    }
+
+//    @Override
+//    public Comparator<TaskDetail> thenComparingInt(ToIntFunction<? super TaskDetail> keyExtractor) {
+//        return null;
+//    }
 }
 //class NameAndMoney implements Comparable<NameAndMoney> {
 //    String name;
@@ -138,13 +157,17 @@ public class Main {
             }
             else if (choose == 4){
                 //listall;
-                TaskDetail[] array = new TaskDetail[myTasks.size()];
-                Arrays.sort(myTasks.toArray(array));
-                for (TaskDetail tasks: myTasks) {
-                    System.out.println("Task index: "+myTasks.indexOf(tasks)+", "+"Name: "
-                            +tasks.getName()+", "+"Description: "+ tasks.getDesc()+", "+"Priority: "
-                            +tasks.getPriority());
-                }
+//                TaskDetail[] array = new TaskDetail[myTasks.size()];
+//                Arrays.sort(myTasks.toArray(array));
+               //Collections.sort(myTasks);
+                Collections.sort(myTasks, new Sortbyroll());
+                myTasks.forEach(myTask -> System.out.println(myTask));
+
+//                for (TaskDetail tasks: myTasks) {
+//                    System.out.println("Task index: "+myTasks.indexOf(tasks)+", "+"Name: "
+//                            +tasks.getName()+", "+"Description: "+ tasks.getDesc()+", "+"Priority: "
+//                            +tasks.getPriority());
+//                }
             }
             else if (choose == 0){
                 //default
