@@ -50,8 +50,12 @@ class TaskDetail implements Comparable<TaskDetail>{
     @Override
     public int compareTo(TaskDetail other) {
 
-
-        return name.compareTo(other.name);
+        if (getPriority() - other.getPriority()== 0) {
+            return name.compareTo(other.name);
+        }
+        else{
+            return getPriority() - other.getPriority();
+        }
     }
 
 
@@ -159,15 +163,14 @@ public class Main {
                 //listall;
 //                TaskDetail[] array = new TaskDetail[myTasks.size()];
 //                Arrays.sort(myTasks.toArray(array));
-               //Collections.sort(myTasks);
-                Collections.sort(myTasks, new Sortbyroll());
-                myTasks.forEach(myTask -> System.out.println(myTask));
-
-//                for (TaskDetail tasks: myTasks) {
-//                    System.out.println("Task index: "+myTasks.indexOf(tasks)+", "+"Name: "
-//                            +tasks.getName()+", "+"Description: "+ tasks.getDesc()+", "+"Priority: "
-//                            +tasks.getPriority());
-//                }
+               Collections.sort(myTasks);
+//                Collections.sort(myTasks, new Sortbyroll());
+//                myTasks.forEach(myTask -> System.out.println(myTask));
+                for (TaskDetail tasks: myTasks) {
+                    System.out.println("Task index: "+myTasks.indexOf(tasks)+", "+"Name: "
+                            +tasks.getName()+", "+"Description: "+ tasks.getDesc()+", "+"Priority: "
+                            +tasks.getPriority());
+                }
             }
             else if (choose == 0){
                 //default
