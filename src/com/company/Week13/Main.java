@@ -50,7 +50,7 @@ public class Main {
         Thread person1 = new Thread(r);
         person1.setName("Person1");
         Thread person2 = new Thread(r);
-        person1.setName("Person2");
+        person2.setName("Person2");
         person1.start();
         person2.start();
 
